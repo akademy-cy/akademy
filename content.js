@@ -157,7 +157,12 @@ window.AKADEMY_CONTENT = {
       { id: "D", name: "D Selection (BMO)", date: null, confirmed: false, contributesTo: ["IMO"],
         note: "The D Selection is the BMO itself." }
     ],
+    // Other national competitions, shown below the selection timeline.
+    // "tag" is the small label above the name.
     separate: [
+      { name: "National Mathematics Competition", date: "2026-12-12", confirmed: true,
+        tag: "National round",
+        note: "Only students who qualify through the regional competitions can take part." },
       { name: "Cyprus Mathematical Olympiad", date: "2027-04-18", confirmed: true,
         note: "A separate national competition. It is not part of the EGMO selection." }
     ]
