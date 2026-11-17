@@ -849,7 +849,7 @@ footer .hand{font-size:1.3rem;color:var(--on-deep)}
       var li=h('li',{class:'ol-st'+(sel!=='All'?(s.contributesTo.indexOf(sel)>=0?' hl':' dim'):'')},[btn,panel]);line.appendChild(li);
     });
     var sep=document.getElementById('ol-separate');sep.innerHTML='';
-    (O.separate||[]).forEach(function(s){sep.appendChild(h('div',{class:'ol-sep'},[h('div',null,[h('span',{class:'tg dark',text:'Separate national competition'}),h('h3',{text:s.name,style:'margin-top:.5rem'}),s.note?h('p',{text:s.note}):null]),h('span',{class:'when'},[s.date?longDate(s.date):'Date to be announced',' ',badge(s)])]))});
+    (O.separate||[]).forEach(function(s){sep.appendChild(h('div',{class:'ol-sep'},[h('div',null,[h('span',{class:'tg dark',text:s.tag||'Separate national competition'}),h('h3',{text:s.name,style:'margin-top:.5rem'}),s.note?h('p',{text:s.note}):null]),h('span',{class:'when'},[s.date?longDate(s.date):'Date to be announced',' ',badge(s)])]))});
   }
   var olc=document.getElementById('ol-comps');
   function olChips(){olc.innerHTML='';[{id:'All',name:'All stages'}].concat(O.competitions).forEach(function(c){olc.appendChild(h('button',{type:'button','aria-pressed':String(sel===c.id),title:c.full||'',text:c.id==='All'?c.name:c.name+' path',onclick:function(){sel=c.id;olChips();renderOl()}}))})}
