@@ -469,10 +469,10 @@ footer .hand{font-size:1.3rem;color:var(--on-deep)}
   <section class="numbers page" id="numbers" aria-label="AKademy in numbers">
     <div class="wrap">
       <div class="eq" role="list" aria-label="AKademy in numbers">
-        <div class="stat" role="listitem"><b data-count="27">27</b><span>girls</span></div><i aria-hidden="true">+</i>
-        <div class="stat" role="listitem"><b data-count="10">10</b><span>lectures</span></div><i aria-hidden="true">+</i>
-        <div class="stat" role="listitem"><b data-count="15">15</b><span>hours of math</span></div><i aria-hidden="true">+</i>
-        <div class="stat" role="listitem"><b data-count="2">2</b><span>age groups</span></div><i aria-hidden="true">=</i>
+        <div class="stat" role="listitem"><b data-count="27" data-stat="girls">27</b><span>girls</span></div><i aria-hidden="true">+</i>
+        <div class="stat" role="listitem"><b data-count="10" data-stat="lectures">10</b><span>lectures</span></div><i aria-hidden="true">+</i>
+        <div class="stat" role="listitem"><b data-count="15" data-stat="hours">15</b><span>hours of math</span></div><i aria-hidden="true">+</i>
+        <div class="stat" role="listitem"><b data-count="2" data-stat="groups">2</b><span>age groups</span></div><i aria-hidden="true">=</i>
         <div class="stat total" role="listitem"><b data-count="100" data-suffix="%">100%</b><span>free</span></div>
       </div>
     </div>
@@ -658,8 +658,23 @@ footer .hand{font-size:1.3rem;color:var(--on-deep)}
   <a href="#register" data-for="register"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5.5" width="18" height="13" rx="2"/><path d="m3.5 7 8.5 6.5L20.5 7"/></svg>Contact</a>
 </nav>
 
+<script src="content.js"></script>
 <script>
 (function(){
+  /* live numbers from content.js (stats) */
+  var S=(window.AKADEMY_CONTENT||{}).stats;
+  if(S){try{
+    var TZ='Europe/Nicosia';
+    function wall(t){var o={};new Intl.DateTimeFormat('en-US',{timeZone:TZ,hourCycle:'h23',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit'}).formatToParts(new Date(t)).forEach(function(p){o[p.type]=+p.value});return Date.UTC(o.year,o.month-1,o.day,o.hour%24,o.minute,o.second)}
+    function cy(date,time){var d=date.split('-').map(Number),m=(time||'00:00').split(':').map(Number);var g=Date.UTC(d[0],d[1]-1,d[2],m[0],m[1]);var u=g-(wall(g)-g);return g-(wall(u)-u)}
+    var L=S.lectures,n=L.count,now=Date.now(),skip=L.skipDates||[];
+    var d=L.countedUntil.split('-').map(Number),day=new Date(Date.UTC(d[0],d[1]-1,d[2]+1));
+    for(var k=0;k<2000;k++){var iso=day.toISOString().slice(0,10);
+      if(day.getUTCDay()===L.weekday&&skip.indexOf(iso)<0){if(cy(iso,L.endTime)<=now)n+=L.perWeek;else break}
+      day.setUTCDate(day.getUTCDate()+1)}
+    var vals={girls:S.girls,lectures:n,hours:Math.round(n*L.hoursEach),groups:S.ageGroups};
+    document.querySelectorAll('[data-stat]').forEach(function(b){var v=vals[b.dataset.stat];if(v!=null&&!isNaN(v)){b.dataset.count=v;b.textContent=v+(b.dataset.suffix||'')}});
+  }catch(e){}}
   var els=document.querySelectorAll('.stat b');
   if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return;}
   var still=matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -678,7 +693,6 @@ footer .hand{font-size:1.3rem;color:var(--on-deep)}
   els.forEach(function(el){io.observe(el)});
 })();
 </script>
-<script src="content.js"></script>
 <script>
 /* Events & Opportunities. All content comes from content.js */
 (function(){
