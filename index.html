@@ -658,11 +658,12 @@ footer .hand{font-size:1.3rem;color:var(--on-deep)}
   <a href="#register" data-for="register"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5.5" width="18" height="13" rx="2"/><path d="m3.5 7 8.5 6.5L20.5 7"/></svg>Contact</a>
 </nav>
 
-<script src="content.js"></script>
+<script src="content.js?v=20261118"></script>
 <script>
 (function(){
   /* live numbers from content.js (stats) */
-  var S=(window.AKADEMY_CONTENT||{}).stats;
+  var S=(window.AKADEMY_CONTENT||{}).stats||{girls:27,ageGroups:2,
+    lectures:{count:0,countedUntil:'2026-10-12',weekday:2,endTime:'21:00',perWeek:2,hoursEach:1.5,skipDates:[]}};
   if(S){try{
     var TZ='Europe/Nicosia';
     function wall(t){var o={};new Intl.DateTimeFormat('en-US',{timeZone:TZ,hourCycle:'h23',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit'}).formatToParts(new Date(t)).forEach(function(p){o[p.type]=+p.value});return Date.UTC(o.year,o.month-1,o.day,o.hour%24,o.minute,o.second)}
