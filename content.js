@@ -33,6 +33,29 @@ window.AKADEMY_CONTENT = {
   instagram: "https://www.instagram.com/akademy_maths/",
 
   /* ------------------------------------------------------------------ */
+  /* NUMBERS at the top of the site                                      */
+  /* Lectures and hours update by themselves: every week, once the       */
+  /* lecture day has ended (endTime, Cyprus time), perWeek lectures are  */
+  /* added. hours = lectures × hoursEach.                                */
+  /* skipDates: lecture days with no lectures (holidays), "YYYY-MM-DD".  */
+  /* To correct the count, set count to the real number and              */
+  /* countedUntil to today's date.                                       */
+  /* ------------------------------------------------------------------ */
+  stats: {
+    girls: 27,
+    ageGroups: 2,
+    lectures: {
+      count: 10,                  // lectures held up to and including countedUntil
+      countedUntil: "2026-11-15",
+      weekday: 2,                 // 0 = Sunday, 1 = Monday, 2 = Tuesday ...
+      endTime: "21:00",           // when the lectures finish, Cyprus time
+      perWeek: 2,                 // Gymnasium + Lyceum
+      hoursEach: 1.5,
+      skipDates: []               // e.g. ["2026-12-29", "2027-01-05"]
+    }
+  },
+
+  /* ------------------------------------------------------------------ */
   /* EVENTS                                                              */
   /* ------------------------------------------------------------------ */
   events: [
