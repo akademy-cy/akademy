@@ -45,8 +45,8 @@ window.AKADEMY_CONTENT = {
     girls: 27,
     ageGroups: 2,
     lectures: {
-      count: 10,                  // lectures held up to and including countedUntil
-      countedUntil: "2026-11-15",
+      count: 0,                   // lectures held up to and including countedUntil
+      countedUntil: "2026-10-12", // first lecture was Tuesday 13 October 2026
       weekday: 2,                 // 0 = Sunday, 1 = Monday, 2 = Tuesday ...
       endTime: "21:00",           // when the lectures finish, Cyprus time
       perWeek: 2,                 // Gymnasium + Lyceum
